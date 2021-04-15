@@ -3,6 +3,7 @@ import './App.css';
 import Footer from './components/Footer';
 import Header from './components/Header';
 import { Container } from 'react-bootstrap';
+import Article from './components/Article';
 // import './bootstrap.min.css';
 
 function App() {
@@ -11,7 +12,8 @@ function App() {
 			<Header></Header>
 			<main>
 				<Container>
-					<div>Hello</div>
+					{/* <div>Hello</div> */}
+					<Route path="/article" component={Article} />
 				</Container>
 			</main>
 			<Footer></Footer>
