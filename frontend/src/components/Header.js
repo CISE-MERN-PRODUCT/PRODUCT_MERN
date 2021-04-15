@@ -16,9 +16,10 @@ const Header = () => {
 					</Nav>
 					<Nav>
 						<LinkContainer to="/login">
-							<Button variant="outline-light">Log In</Button>
+							<Nav.Link>
+								<i className="fas fa-user"></i> Sign in
+							</Nav.Link>
 						</LinkContainer>
-
 						{/* FOR LOGGED IN USERS  */}
 						{/* <NavDropdown title={<i className="fas fa-user" />} id="username">
 							<LinkContainer to="/profile">
