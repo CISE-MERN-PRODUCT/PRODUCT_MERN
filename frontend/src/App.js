@@ -4,6 +4,7 @@ import Footer from './components/Footer';
 import Header from './components/Header';
 import { Container } from 'react-bootstrap';
 import Article from './components/Article';
+import HomePage from './pages/HomePage';
 // import './bootstrap.min.css';
 
 function App() {
@@ -13,7 +14,9 @@ function App() {
 			<main>
 				<Container>
 					{/* <div>Hello</div> */}
-					<Route path="/article" component={Article} />
+					<Route exact path="/" component={HomePage} />
+
+					<Route exact path="/article" component={Article} />
 				</Container>
 			</main>
 			<Footer></Footer>
