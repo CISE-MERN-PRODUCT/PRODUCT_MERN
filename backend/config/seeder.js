@@ -12,12 +12,6 @@ const importData = async () => {
 	try {
 		await Article.deleteMany();
 
-		// const createdUsers = await User.insertMany(users);
-
-		// const mappedArticle  = articles.map(article => {return {article.title }})
-
-		// const adminUser = createdUsers[0]._id;
-
 		await Article.insertMany(articles);
 
 		console.log('Data Imported');
