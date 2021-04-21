@@ -1,7 +1,7 @@
 const express = require('express');
 const connectDB = require('./config/db');
 const dotenv = require('dotenv');
-const bookRoutes = require('./routes/api/books');
+const bookRoutes = require('./routes/articles');
 var cors = require('cors');
 const path = require('path');
 
@@ -16,7 +16,7 @@ app.use(cors({ origin: true, credentials: true }));
 app.use(express.json({ extended: false }));
 
 //ROUTES
-app.use('/api/books', bookRoutes);
+app.use('/api/articles', bookRoutes);
 
 //Check production or dev
 if (process.env.NODE_ENV === 'production') {

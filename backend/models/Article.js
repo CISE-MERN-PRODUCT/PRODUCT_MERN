@@ -6,11 +6,11 @@ const Article = new mongoose.Schema({
 		required: true,
 	},
 	author: {
-		type: Number,
+		type: String,
 		default: 'Unknown',
 	},
 	year: {
-		type: Number,
+		type: String,
 		default: 'Unknown',
 	},
 	claim: {
