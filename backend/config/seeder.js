@@ -1,11 +1,8 @@
-import mongoose from 'mongoose';
-import dotenv from 'dotenv';
-import { articles } from 'evidence.js';
-import users from './data/users.js';
-import User from './models/userModel.js';
-import Product from './models/productModel.js';
-import Order from './models/orderModel.js';
-import connectDB from './config/db.js';
+const mongoose = require('mongoose');
+const dotenv = require('dotenv');
+const articles = require('../data/evidence');
+const Article = require('../models/Article');
+const connectDB = require('./db.js');
 
 dotenv.config();
 
@@ -13,32 +10,20 @@ connectDB();
 
 const importData = async () => {
 	try {
-		await Order.deleteMany();
-		await Product.deleteMany();
-		await User.deleteMany();
+		await Article.deleteMany();
 
-		const createdUsers = await User.insertMany(users);
+		await Article.insertMany(articles);
 
-		const adminUser = createdUsers[0]._id;
-
-		const sampleProducts = products.map((product) => {
-			return { ...product, user: adminUser };
-		});
-
-		await Product.insertMany(sampleProducts);
-
-		console.log('Data Imported'.green.inverse);
+		console.log('Data Imported');
 		process.exit();
 	} catch (err) {
-		console.log(`${error}`.red.inverse);
+		console.log(`${err}`);
 		process.exit(1);
 	}
 };
 const destroyData = async () => {
 	try {
-		await Order.deleteMany();
-		await Product.deleteMany();
-		await User.deleteMany();
+		await Article.deleteMany();
 
 		console.log('Data destroyed'.red.inverse);
 		process.exit();
