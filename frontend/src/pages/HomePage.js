@@ -12,9 +12,9 @@ const HomePage = () => {
 						<tr>
 							<th>Title</th>
 							<th>Author</th>
+							<th>Year</th>
 							<th>SE Practice</th>
 							<th>Claim</th>
-							<th>SE Practice</th>
 							<th>Strength of the Evidence</th>
 						</tr>
 					</thead>
@@ -25,9 +25,9 @@ const HomePage = () => {
 								<td>{article?.title}</td>
 								<td>{article?.author}</td>
 								<td>{article.year}</td>
-								<td></td>
-								<td></td>
-								<td></td>
+								<td>{article.se_practice}</td>
+								<td>{article.claim}</td>
+								<td>{article.evidence_strength}</td>
 							</tr>
 						))}
 					</tbody>

@@ -14,10 +14,7 @@ const User = new mongoose.Schema({
 		type: String,
 		required: true,
 	},
-	// isAdmin: {
-	// 	type: Boolean,
-	// 	default: false,
-	// },
+
 	userType: {
 		type: String,
 		enum: ['user', 'admin', 'moderator', 'analyst'],
