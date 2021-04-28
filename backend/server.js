@@ -1,9 +1,14 @@
 const express = require('express');
-const connectDB = require('./config/db');
+
 const dotenv = require('dotenv');
-const bookRoutes = require('./routes/articles');
-var cors = require('cors');
+
+const cors = require('cors');
+
 const path = require('path');
+
+const connectDB = require('./config/db');
+
+const bookRoutes = require('./routes/articles');
 
 const app = express();
 
@@ -20,13 +25,13 @@ app.use('/api/articles', bookRoutes);
 
 //Check production or dev
 if (process.env.NODE_ENV === 'production') {
-	app.use(express.static(path.join(path.resolve(), '/frontend/build')));
+  app.use(express.static(path.join(path.resolve(), '/frontend/build')));
 
-	app.get('*', (req, res) => res.sendFile(path.resolve('frontend', 'build', 'index.html')));
+  app.get('*', (req, res) => res.sendFile(path.resolve('frontend', 'build', 'index.html')));
 } else {
-	app.get('/', (req, res) => {
-		res.send('Hello fellow CISE students the app is running yaay!!!!');
-	});
+  app.get('/', (req, res) => {
+    res.send('Hello fellow CISE students the app is running yaay!!!!');
+  });
 }
 
 const port = process.env.PORT || 5000;
