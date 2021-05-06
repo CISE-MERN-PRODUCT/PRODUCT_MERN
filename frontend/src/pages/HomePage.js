@@ -85,7 +85,7 @@ const HomePage = () => {
                   }}
                 >
                   Title
-                  <TiArrowUnsorte className="ml-2"></TiArrowUnsorte>
+                  <TiArrowUnsorted className="ml-2"></TiArrowUnsorted>
                 </th>
                 <th
                   style={style}
