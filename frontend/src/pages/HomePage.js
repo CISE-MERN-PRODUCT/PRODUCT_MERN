@@ -3,7 +3,7 @@ import { Container, Table } from 'react-bootstrap';
 import Loader from '../components/Loader';
 // import { articles } from '../data/evidence';
 import axios from 'axios';
-import { LinkContainer } from 'react-router-bootstrap';
+// import { LinkContainer } from 'react-router-bootstrap';
 import { TiArrowUnsorted } from 'react-icons/ti';
 
 const HomePage = () => {
