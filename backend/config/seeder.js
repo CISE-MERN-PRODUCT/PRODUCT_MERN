@@ -1,6 +1,7 @@
 const dotenv = require('dotenv');
-const articles = require('../data/evidence');
+const { articles, practices } = require('../data/evidence');
 const Article = require('../models/Article');
+const Practice = require('../models/Practice');
 const connectDB = require('./db.js');
 
 dotenv.config();
@@ -10,8 +11,10 @@ connectDB();
 const importData = async () => {
   try {
     await Article.deleteMany();
-
     await Article.insertMany(articles);
+
+    await Practice.deleteMany();
+    await Practice.insertMany(practices);
 
     console.log('Data Imported');
     process.exit();

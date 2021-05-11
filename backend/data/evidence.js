@@ -9,7 +9,7 @@
 // claim: 'Product quality',
 // claim: 'Team confidence and satisfaction',
 
-const articles = [
+exports.articles = [
   {
     author: 'Aniche, M F and Testing, MA Gerosa Software',
     evidence_strength: 'Strongly Support',
@@ -275,4 +275,13 @@ const articles = [
   },
 ];
 
-module.exports = articles;
+// claim: 'Code Quality',
+// claim: 'Product quality',
+// claim: 'Team confidence and satisfaction',
+
+exports.practices = [
+  {
+    name: 'TDD',
+    claims: ['Code Quality', 'Product quality', 'Team confidence and satisfaction'],
+  },
+];
