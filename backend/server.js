@@ -10,6 +10,8 @@ const connectDB = require('./config/db');
 
 const bookRoutes = require('./routes/articles');
 
+const practiceRoutes = require('./routes/practices');
+
 const app = express();
 
 dotenv.config();
@@ -22,6 +24,7 @@ app.use(express.json({ extended: false }));
 
 //ROUTES
 app.use('/api/articles', bookRoutes);
+app.use('/api/practices', practiceRoutes);
 
 //Check production or dev
 if (process.env.NODE_ENV === 'production') {

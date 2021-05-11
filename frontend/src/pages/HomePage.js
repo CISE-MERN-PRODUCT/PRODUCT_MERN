@@ -1,23 +1,47 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Table } from 'react-bootstrap';
+import { Container, Dropdown, Table } from 'react-bootstrap';
 import Loader from '../components/Loader';
 // import { articles } from '../data/evidence';
 import axios from 'axios';
 // import { LinkContainer } from 'react-router-bootstrap';
 import { TiArrowUnsorted } from 'react-icons/ti';
+import Filter from '../components/Filter';
+
+const style = {
+  cursor: 'pointer',
+};
+
+const evidence = ['Strongly Support', 'Weekly Support', 'Weekly Disagree', 'Strongly Disagree'];
 
 const HomePage = () => {
   const [articles, setArticles] = useState([]);
+  const [practices, setPractices] = useState([]);
+  const [displayArticles, setDisplayArticles] = useState([]);
+  const [practiceFilter, setPracticeFilter] = useState('All');
+  const [claimFilter, setClaimFilter] = useState('All');
+
   const [sortConf, setSortConf] = useState({
     property: 'evidence_strength',
     ascending: true,
   });
 
-  const style = {
-    cursor: 'pointer',
-  };
+  // USE EFFECT
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data } = await axios.get('/api/articles');
+      const { data: dataPractices } = await axios.get('/api/practices');
 
-  const evidence = ['Strongly Support', 'Weekly Support', 'Weekly Disagree', 'Strongly Disagree'];
+      console.log(dataPractices);
+
+      setArticles(data);
+      setDisplayArticles(data);
+      setPractices(dataPractices);
+      // return data;
+    };
+    if (articles.length === 0) {
+      fetchData();
+    }
+  }, [articles]);
 
   const isSupportive = (evidence) => {
     if (evidence.toLowerCase().includes('support')) {
@@ -45,8 +69,8 @@ const HomePage = () => {
 
   const sortArray = (type) => {
     const sorted = !sortConf.ascending
-      ? [...articles].sort((a, b) => compare(a, b, type))
-      : [...articles].sort((a, b) => compare(b, a, type));
+      ? [...displayArticles].sort((a, b) => compare(a, b, type))
+      : [...displayArticles].sort((a, b) => compare(b, a, type));
 
     setSortConf({
       property: type,
@@ -54,27 +78,61 @@ const HomePage = () => {
     });
     // console.log(sortParameter);
     console.log(sorted);
-    setArticles(sorted);
+    setDisplayArticles(sorted);
   };
 
-  // USE EFFECT
-  useEffect(() => {
-    const fetchData = async () => {
-      const { data } = await axios.get('/api/articles');
+  const handleSelectPractice = (practice) => {
+    if (practice === 'All') {
+      setDisplayArticles(articles);
+      setPracticeFilter('All');
 
-      setArticles(data);
-      // return data;
-    };
-    if (articles.length === 0) {
-      fetchData();
+      return;
     }
-  }, [articles]);
+
+    const filteredArticles = [...articles].filter((el) => {
+      return el.se_practice === practice;
+    });
+
+    console.log(filteredArticles);
+
+    setDisplayArticles(filteredArticles);
+    setPracticeFilter(practice);
+  };
+
+  const handleSelectFilter = (claim) => {
+    if (claim === 'All') {
+      setDisplayArticles(articles);
+      setClaimFilter('All');
+
+      return;
+    }
+
+    const filteredArticles = [...articles].filter((el) => {
+      return el.claim === claim;
+    });
+
+    console.log(filteredArticles);
+
+    setDisplayArticles(filteredArticles);
+    setClaimFilter(claim);
+  };
 
   return (
     <>
-      <Container>
+      <Container className="d-flex justify-content-center align-items-center flex-column">
         <h1 className="my-3">Results</h1>
-        {articles.length !== 0 ? (
+        <Filter
+          articles={articles}
+          handleSelectFilter={handleSelectFilter}
+          handleSelectPractice={handleSelectPractice}
+          practices={practices}
+          practiceFilter={practiceFilter}
+          claimFilter={claimFilter}
+        ></Filter>
+
+        {!displayArticles && <Loader />}
+
+        {displayArticles.length !== 0 ? (
           <Table striped bordered hover>
             <thead>
               <tr>
@@ -127,7 +185,7 @@ const HomePage = () => {
             </thead>
 
             <tbody>
-              {articles.map((article, index) => (
+              {displayArticles.map((article, index) => (
                 <tr key={index}>
                   <td>{article?.title}</td>
                   <td>{article?.author}</td>
@@ -152,23 +210,8 @@ const HomePage = () => {
             </tbody>
           </Table>
         ) : (
-          <Loader />
+          <h2>No articles found</h2>
         )}
-
-        {/* <SmartDataTable
-					orderedHeaders={[
-						'se_practice',
-						'author',
-						'title',
-						'claim',
-						'evidence_strength',
-					]}
-					data={articles}
-					sortable
-					name="table"
-					className="ui compact selectable table table table-striped table-bordered table-hover"
-					headers={headers}
-				></SmartDataTable> */}
       </Container>
     </>
   );
