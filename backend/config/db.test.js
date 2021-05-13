@@ -10,9 +10,6 @@ const connectDB = async () => {
       useUnifiedTopology: true,
       useNewUrlParser: true,
       useCreateIndex: true,
-      autoReconnect: true,
-      reconnectTries: Number.MAX_VALUE,
-      reconnectInterval: 1000,
     });
 
     console.log('MongoDB is Connected...');
@@ -56,7 +53,7 @@ describe('', () => {
     done();
   });
   it('Mongodb memory close test', async (done) => {
-    await closeDB();
+    // await closeDB();
     done();
   });
 });
