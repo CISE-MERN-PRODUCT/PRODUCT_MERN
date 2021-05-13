@@ -10,12 +10,12 @@ const Filter = ({
   claimFilter,
 }) => {
   return (
-    <div className="my-3 d-flex align-items-center">
+    <div className="my-3 mr-auto d-flex align-items-center justify-content-start">
       {articles && (
         <>
           <span className="mr-2">SE Practice: </span>
           <Dropdown onSelect={handleSelectPractice}>
-            <Dropdown.Toggle variant="info" id="dropdown-basic">
+            <Dropdown.Toggle variant="info" id="dropdown-basic" style={{ minWidth: '80px' }}>
               {practiceFilter}
             </Dropdown.Toggle>
 
@@ -34,9 +34,9 @@ const Filter = ({
 
       {practiceFilter !== 'All' && (
         <>
-          <span className="mx-2">Claim: </span>
+          <span className="ml-4 mr-2">Claim: </span>
           <Dropdown onSelect={handleSelectFilter}>
-            <Dropdown.Toggle variant="info" id="dropdown-basic">
+            <Dropdown.Toggle variant="info" id="dropdown-basic" style={{ minWidth: '80px' }}>
               {claimFilter}
             </Dropdown.Toggle>
 

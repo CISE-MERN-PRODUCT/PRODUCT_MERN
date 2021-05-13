@@ -1,7 +1,4 @@
 const request = require('supertest');
-const articleRoutes = require('./routes/articles');
-const practiceRoutes = require('./routes/practices');
-const express = require('express');
 
 const app = require('./app');
 beforeAll((done) => {
