@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Dropdown, Table } from 'react-bootstrap';
+import { Container, Table } from 'react-bootstrap';
 import Loader from '../components/Loader';
 // import { articles } from '../data/evidence';
 import axios from 'axios';

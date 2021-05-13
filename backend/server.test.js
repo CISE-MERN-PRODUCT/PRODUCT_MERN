@@ -7,8 +7,9 @@ beforeAll(async (done) => {
   await connectDB();
   done();
 });
+
 describe('practice routes', () => {
-  it('GET /practice --> array of practices', async (done) => {
+  it('GET /api/practice/ --> array of practices', async (done) => {
     return request(app)
       .get('/api/practices/')
       .expect('Content-Type', /json/)
@@ -29,6 +30,22 @@ describe('practice routes', () => {
         done();
       });
     // expect(response.statusCode).toBe(200);
+  });
+});
+
+describe('user routes', () => {
+  it('POST /api/users/login --> array of practices', async (done) => {
+    return request(app)
+      .post('/api/users/login/')
+      .send({
+        username: 'user',
+        password: 'password',
+      })
+      .expect('Content-Type', /json/)
+      .expect(200)
+      .then((response) => {
+        expect(response.body.msg('Login Successful'));
+      });
   });
 });
 
