@@ -1,7 +1,10 @@
 const request = require('supertest');
 
 const app = require('./app');
-beforeAll((done) => {
+const { connectDB, clearDB, closeDB } = require('./config/db.test');
+
+beforeAll(async (done) => {
+  await connectDB();
   done();
 });
 describe('practice routes', () => {
