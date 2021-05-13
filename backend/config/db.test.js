@@ -52,10 +52,6 @@ describe('', () => {
     await clearDB();
     done();
   });
-  it('Mongodb memory close test', async (done) => {
-    // await closeDB();
-    done();
-  });
 });
 
 module.exports = { connectDB, closeDB, clearDB };
