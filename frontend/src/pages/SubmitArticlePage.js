@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Alert, Button, Col, Container, Dropdown, Form, Row } from 'react-bootstrap';
+import { Alert, Button, Container, Dropdown, Form, Row } from 'react-bootstrap';
 import axios from 'axios';
 
 const formStyle = {
