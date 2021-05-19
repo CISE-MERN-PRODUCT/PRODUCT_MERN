@@ -49,7 +49,7 @@ describe('practice routes', () => {
 //   });
 // });
 
-describe('article routes', () => {
+describe('article routes', async () => {
   it('POST /api/articles', async (done) => {
     return request(app)
       .post('/api/articles')
@@ -64,7 +64,7 @@ describe('article routes', () => {
       .expect('Content-Type', /json/)
       .expect(200)
       .then((response) => {
-        expect(response.body.msg).toEqual('Article added successfully');
+        expect(response.body.msg).toEqual('Article submitted successfully');
         done();
       });
   });
@@ -81,9 +81,11 @@ describe('article routes', () => {
         done();
       });
   });
+  await clearDB();
 });
 
-afterAll((done) => {
+afterAll(async (done) => {
   // Closing the DB connection allows Jest to exit successfully.
+  await closeDB();
   done();
 });

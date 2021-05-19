@@ -2,7 +2,7 @@ const dotenv = require('dotenv');
 const { articles, practices } = require('../data/evidence');
 const Article = require('../models/Article');
 const Practice = require('../models/Practice');
-const connectDB = require('./db.js');
+const connectDB = require('./db');
 
 dotenv.config();
 

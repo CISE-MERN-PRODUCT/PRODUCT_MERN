@@ -1,5 +1,9 @@
 const mongoose = require('mongoose');
 
+function areWeTestingWithJest() {
+  return process.env.JEST_WORKER_ID !== undefined;
+}
+
 const connectDB = async () => {
   if (!areWeTestingWithJest()) {
     try {
@@ -16,9 +20,5 @@ const connectDB = async () => {
     }
   }
 };
-
-function areWeTestingWithJest() {
-  return process.env.JEST_WORKER_ID !== undefined;
-}
 
 module.exports = connectDB;
