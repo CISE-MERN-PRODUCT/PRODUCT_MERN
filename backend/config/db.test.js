@@ -1,56 +1,12 @@
-const mongoose = require('mongoose');
-const { MongoMemoryServer } = require('mongodb-memory-server');
-
-const mongod = new MongoMemoryServer();
-
-const connectDB = async () => {
-  try {
-    const uri = await mongod.getUri();
-    await mongoose.connect(uri, {
-      useUnifiedTopology: true,
-      useNewUrlParser: true,
-      useCreateIndex: true,
-    });
-
-    console.log('MongoDB is Connected...');
-  } catch (err) {
-    console.error(err.message);
-    process.exit(1);
-  }
-};
-
-const closeDB = async () => {
-  try {
-    await mongoose.connection.dropDatabase();
-    await mongoose.connection.close();
-    await mongod.stop();
-  } catch (err) {
-    console.error(err.message);
-    process.exit(1);
-  }
-};
-
-const clearDB = async () => {
-  try {
-    const collections = Object.values(mongoose.connection.collections);
-    for (const collection of collections) {
-      await collection.deleteMany();
-    }
-  } catch (err) {
-    console.error(err.message);
-    process.exit(1);
-  }
-};
+const { connectDB, clearDB } = require('./db.memory');
 
 describe('Mongo memory test', () => {
-  it('Mongodb memory connect test', async (done) => {
+  it('Mongodb memory connect test', async () => {
+    expect.assertions(0);
     await connectDB();
-    done();
   });
-  it('Mongodb memory clear test', async (done) => {
+  it('Mongodb memory clear test', async () => {
+    expect.assertions(0);
     await clearDB();
-    done();
   });
 });
-
-module.exports = { connectDB, closeDB, clearDB };
