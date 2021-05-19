@@ -32,6 +32,7 @@ const HomePage = () => {
       const { data: dataPractices } = await axios.get('/api/practices');
 
       console.log(dataPractices);
+      console.log(data);
 
       setArticles(data);
       setDisplayArticles(data);

@@ -33,18 +33,44 @@ describe('practice routes', () => {
   });
 });
 
-describe('user routes', () => {
-  it('POST /api/users/login --> array of practices', async (done) => {
+// describe('user routes', () => {
+//   it('POST /api/users/login --> array of practices', async (done) => {
+//     return request(app)
+//       .post('/api/users/login/')
+//       .send({
+//         username: 'user',
+//         password: 'password',
+//       })
+//       .expect('Content-Type', /json/)
+//       .expect(200)
+//       .then((response) => {
+//         expect(response.body.msg('Login Successful'));
+//       });
+//   });
+// });
+
+describe('article routes', () => {
+  it('POST /api/articles', async (done) => {
     return request(app)
-      .post('/api/users/login/')
+      .post('/api/articles')
       .send({
-        username: 'user',
-        password: 'password',
+        title: 'Test article',
+        author: 'test author',
+        year: '2000',
+        claim: 'Good for something',
+        se_practice: 'TDD',
+        evidence_strength: 'Strongly support',
       })
       .expect('Content-Type', /json/)
       .expect(200)
       .then((response) => {
-        expect(response.body.msg('Login Successful'));
+        expect(response.body).toEqual(
+          expect.objectContaining({
+            msg: 'Article submitted successfully',
+          }),
+        );
+
+        done();
       });
   });
 });

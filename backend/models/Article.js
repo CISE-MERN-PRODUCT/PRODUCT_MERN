@@ -7,23 +7,28 @@ const Article = new mongoose.Schema({
   },
   author: {
     type: String,
-    default: 'Unknown',
+    required: true,
   },
   year: {
     type: String,
-    default: 'Unknown',
+    required: true,
   },
   claim: {
     type: String,
-    default: 'Unknown',
+    required: true,
   },
   se_practice: {
     type: String,
-    default: 'Unknown',
+    required: true,
   },
   evidence_strength: {
     type: String,
-    default: 'Unknown',
+    required: true,
+  },
+  status: {
+    type: String,
+    enum: ['submitted', 'rejected', 'accepted', 'analyzed', 'public'],
+    default: 'submitted',
   },
 });
 

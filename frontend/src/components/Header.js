@@ -15,7 +15,7 @@ const Header = () => {
               <Nav.Link>All Articles</Nav.Link>
             </LinkContainer>
 
-            <LinkContainer to="suggest">
+            <LinkContainer to="submit">
               <Nav.Link>Suggest an Article</Nav.Link>
             </LinkContainer>
           </Nav>
