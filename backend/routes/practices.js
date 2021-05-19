@@ -10,10 +10,11 @@ router.get('/', (req, res) => {
     .catch((err) => res.status(404).json({ noarticlesfound: 'No Practices found', message: err }));
 });
 
-router.post('/', (req, res) => {
-  Practice.create(req.body)
-    .then((practice) => res.json({ msg: 'Article added successfully', practice: practice }))
-    .catch((err) => res.status(400).json({ error: 'Unable to add this practice', message: err }));
-});
+// router.post('/', (req, res) => {
+
+//   Practice.create(req.body)
+//     .then((practice) => res.json({ msg: 'Article added successfully', practice: practice }))
+//     .catch((err) => res.status(400).json({ error: 'Unable to add this practice', message: err }));
+// });
 
 module.exports = router;

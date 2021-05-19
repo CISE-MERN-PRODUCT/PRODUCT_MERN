@@ -7,8 +7,9 @@ beforeAll(async (done) => {
   await connectDB();
   done();
 });
+
 describe('practice routes', () => {
-  it('GET /practice --> array of practices', async (done) => {
+  it('GET /api/practice/ --> array of practices', async (done) => {
     return request(app)
       .get('/api/practices/')
       .expect('Content-Type', /json/)
@@ -32,12 +33,33 @@ describe('practice routes', () => {
   });
 });
 
+// describe('user routes', () => {
+//   it('POST /api/users/login --> array of practices', async (done) => {
+//     return request(app)
+//       .post('/api/users/login/')
+//       .send({
+//         username: 'user',
+//         password: 'password',
+//       })
+//       .expect('Content-Type', /json/)
+//       .expect(200)
+//       .then((response) => {
+//         expect(response.body.msg('Login Successful'));
+//       });
+//   });
+// });
+
 describe('article routes', () => {
-  it('Post /api/articles/ --> article', async (done) => {
+  it('POST /api/articles', async (done) => {
     return request(app)
-      .post('/api/articles/')
+      .post('/api/articles')
       .send({
-        title: 'Hello',
+        title: 'Test article',
+        author: 'test author',
+        year: '2000',
+        claim: 'Good for something',
+        se_practice: 'TDD',
+        evidence_strength: 'Strongly support',
       })
       .expect('Content-Type', /json/)
       .expect(200)
@@ -58,7 +80,6 @@ describe('article routes', () => {
         expect(response.body.error).toEqual('Unable to add this article');
         done();
       });
-    // expect(response.statusCode).toBe(200);
   });
 });
 

@@ -43,7 +43,7 @@ const clearDB = async () => {
   }
 };
 
-describe('', () => {
+describe('Mongo memory test', () => {
   it('Mongodb memory connect test', async (done) => {
     await connectDB();
     done();
