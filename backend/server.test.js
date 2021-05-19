@@ -32,6 +32,36 @@ describe('practice routes', () => {
   });
 });
 
+describe('article routes', () => {
+  it('Post /api/articles/ --> article', async (done) => {
+    return request(app)
+      .post('/api/articles/')
+      .send({
+        title: 'Hello',
+      })
+      .expect('Content-Type', /json/)
+      .expect(200)
+      .then((response) => {
+        expect(response.body.msg).toEqual('Article added successfully');
+        done();
+      });
+  });
+  it('Post fail /api/articles/ --> article', async (done) => {
+    return request(app)
+      .post('/api/articles/')
+      .send({
+        title1: 'Hello',
+      })
+      .expect('Content-Type', /json/)
+      .expect(400)
+      .then((response) => {
+        expect(response.body.error).toEqual('Unable to add this article');
+        done();
+      });
+    // expect(response.statusCode).toBe(200);
+  });
+});
+
 afterAll((done) => {
   // Closing the DB connection allows Jest to exit successfully.
   done();
