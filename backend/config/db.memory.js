@@ -23,7 +23,7 @@ const closeDB = async () => {
   try {
     await mongoose.connection.dropDatabase();
     await mongoose.connection.close();
-    await mongod.stop();
+    // await mongod.stop();
   } catch (err) {
     console.error(err.message);
     process.exit(1);
