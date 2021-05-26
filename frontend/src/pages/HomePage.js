@@ -19,6 +19,8 @@ const HomePage = () => {
   const [displayArticles, setDisplayArticles] = useState([]);
   const [practiceFilter, setPracticeFilter] = useState('All');
   const [claimFilter, setClaimFilter] = useState('All');
+  const [yearFrom, setYearFrom] = useState(0);
+  const [yearTo, setYearTo] = useState(0);
 
   const [sortConf, setSortConf] = useState({
     property: 'evidence_strength',
@@ -37,12 +39,60 @@ const HomePage = () => {
       setArticles(data);
       setDisplayArticles(data);
       setPractices(dataPractices);
+
       // return data;
     };
     if (articles.length === 0) {
       fetchData();
     }
-  }, [articles]);
+    if (yearTo !== 0 && yearFrom !== 0) {
+      console.log(yearTo);
+      const tempArticles = articles.filter((art) => {
+        return !isNaN(art.year) && Number(art.year) <= yearTo && Number(art.year) > yearFrom;
+      });
+
+      setDisplayArticles(tempArticles);
+      setYearTo(yearTo);
+    } else if (yearTo !== 0) {
+      const tempArticles = articles.filter((art) => {
+        return !isNaN(art.year) && Number(art.year) <= yearTo;
+      });
+
+      setDisplayArticles(tempArticles);
+      setYearTo(yearTo);
+    } else if (yearFrom !== 0) {
+      const tempArticles = articles.filter((art) => {
+        return !isNaN(art.year) && Number(art.year) >= yearFrom;
+      });
+
+      setDisplayArticles(tempArticles);
+      setYearFrom(yearFrom);
+    }
+  }, [articles, yearFrom, yearTo]);
+
+  const handleYearTo = (year) => {
+    // if (year !== 0) {
+    //   const tempArticles = articles.filter((art) => {
+    //     return !isNaN(art.year) && Number(art.year) < year;
+    //   });
+    //   console.log(tempArticles);
+    //   console.log(year);
+    //   console.log(tempArticles);
+    //   setDisplayArticles(tempArticles);
+    // setYearTo(year);
+    // }
+  };
+
+  const handleYearFrom = (year) => {
+    if (year !== 0) {
+      const tempArticles = articles.filter((art) => {
+        return !isNaN(art.year) && Number(art.year) > year;
+      });
+
+      setDisplayArticles(tempArticles);
+      setYearFrom(year);
+    }
+  };
 
   const isSupportive = (evidence) => {
     if (evidence.toLowerCase().includes('support')) {
@@ -129,6 +179,12 @@ const HomePage = () => {
           practices={practices}
           practiceFilter={practiceFilter}
           claimFilter={claimFilter}
+          handleYearTo={handleYearTo}
+          handleYearFrom={handleYearFrom}
+          setYearFrom={setYearFrom}
+          setYearTo={setYearTo}
+          yearTo={yearTo}
+          yearFrom={yearFrom}
         ></Filter>
 
         {!displayArticles && <Loader />}
