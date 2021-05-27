@@ -1,3 +1,4 @@
+/* eslint-disable jest/no-commented-out-tests */
 const request = require('supertest');
 
 const app = require('./app');
